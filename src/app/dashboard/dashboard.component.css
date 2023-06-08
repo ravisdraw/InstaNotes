@@ -1,0 +1,42 @@
+.dashboard-wrapper {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+  font-size: 1rem;
+  padding: 1rem;
+  padding-right: 0;
+}
+
+.dashboard-items,
+.profile {
+  width: 75%;
+  background-color: white;
+  margin-top: 5rem;
+}
+
+.dashboard-items > ul > li {
+  list-style: none;
+  padding: 1rem;
+  display: flex;
+  gap: 1rem;
+  cursor: pointer;
+}
+
+.dashboard-items > ul > li:hover,
+.profile:hover {
+  color: #5e81f4;
+}
+
+.dashboard-items > ul > li:nth-child(1) {
+  border-right: 6px solid #5e81f4;
+}
+
+.profile {
+  padding: 1rem;
+  cursor: pointer;
+  display: flex;
+  gap: 1rem;
+}
