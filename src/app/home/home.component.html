@@ -1,1 +1,11 @@
-<p>Insta Notes</p>
+<div class="home-wrapper">
+    <div class="title-phase">
+        <h1>Insta Notes</h1>
+        <div class="search-wrap">
+            <input *ngIf="setSearch" type="text" placeholder="Search"/>
+            <button (click)="setSearchStatus()"><fa-icon [icon]="setSearch ? closeIcon : searchIcon"></fa-icon></button>
+        </div>
+    </div>
+    <div class="tag-phase">tags</div>
+    <div class="content-list-phase">content-list</div>
+</div>

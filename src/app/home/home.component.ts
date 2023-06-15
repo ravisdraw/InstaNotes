@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { faClose, faSearch } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-home',
@@ -6,5 +7,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
+  searchIcon = faSearch;
+  closeIcon = faClose;
+  setSearch = false;
 
+  setSearchStatus() {
+    this.setSearch = !this.setSearch;
+  }
 }
+

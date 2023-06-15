@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { faPaintBrush, faAppleAlt, faMoneyCheckDollar, faBookOpenReader, faComputer, faPersonArrowUpFromLine, faPersonCircleCheck, faPersonRifle, faSpaghettiMonsterFlying, faUser  } from '@fortawesome/free-solid-svg-icons';
+import { faPaintBrush, faAppleAlt, faMoneyCheckDollar, faBookOpenReader, faComputer, faUser  } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-dashboard',
