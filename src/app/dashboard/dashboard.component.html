@@ -1,30 +1,22 @@
 <div class="dashboard-wrapper">
   <div class="dashboard-items">
     <ul>
-      <li>
-        <fa-icon [icon]="paintBrush"></fa-icon>
-        <p>Design</p>
-      </li>
-      <li>
-        <fa-icon [icon]="apple"></fa-icon>
-        <p>Tech</p>
-      </li>
-      <li>
-        <fa-icon [icon]="money"></fa-icon>
-        <p>Trading</p>
-      </li>
-      <li>
-        <fa-icon [icon]="book"></fa-icon>
-        <p>Interview</p>
-      </li>
-      <li>
-        <fa-icon [icon]="ai"></fa-icon>
-        <p>AI</p>
+      <li
+        *ngFor="let item of dashBoardItems"
+        [ngStyle]="item.active ? { color: '#5E81F4' } : {}"
+        (click) = "checkActive(item.name)"
+      >
+        <fa-icon [icon]="item.icon"></fa-icon>
+        <p>{{ item.name }}</p>
       </li>
     </ul>
   </div>
-  <div class="profile">
+  <!-- <div class="spline-red-panda">
+    <div class="remove-logo"></div>
+    <iframe src='https://my.spline.design/turningredpandafanartcopy-5666fcd61bfaaaac004182e11c429f74/' frameborder='0' width='100%' height='100%'></iframe>
+  </div> -->
+  <!-- <div class="profile">
     <fa-icon [icon]="profile"></fa-icon>
     <p>Profile</p>
-  </div>
+  </div> -->
 </div>

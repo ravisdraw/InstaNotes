@@ -1,11 +1,42 @@
 <div class="home-wrapper">
-    <div class="title-phase">
-        <h1>Insta Notes</h1>
-        <div class="search-wrap">
-            <input *ngIf="setSearch" type="text" placeholder="Search"/>
-            <button (click)="setSearchStatus()"><fa-icon [icon]="setSearch ? closeIcon : searchIcon"></fa-icon></button>
-        </div>
+  <div class="title-phase">
+    <h6>Insta Notes</h6>
+    <div class="search-wrap">
+      <input *ngIf="setSearch" type="text" placeholder="Search" />
+      <button (click)="setSearchStatus()">
+        <fa-icon [icon]="setSearch ? closeIcon : searchIcon"></fa-icon>
+      </button>
     </div>
-    <div class="tag-phase">tags</div>
-    <div class="content-list-phase">content-list</div>
+  </div>
+  <div class="tag-phase">
+    <button *ngFor="let tag of tags">{{ tag }}</button>
+  </div>
+  <div class="content-list-phase">
+    <table cellspacing="0">
+      <thead>
+        <tr>
+          <th>S.No</th>
+          <th>Category</th>
+          <th>Title</th>
+        </tr>
+      </thead>
+      <tbody class="table-body">
+        <tr>
+          <td>1</td>
+          <td>HTML</td>
+          <td>How to use the span tag in html</td>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td>HTML</td>
+          <td>How to use the span tag in html</td>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td>HTML</td>
+          <td>How to use the span tag in html</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>

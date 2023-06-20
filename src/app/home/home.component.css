@@ -14,10 +14,10 @@
   justify-content: space-between;
 }
 
-.title-phase > h1 {
-  font-size: 3rem;
-  margin-left: 2rem;
-  font-weight: 400;
+.title-phase > h6 {
+  font-size: 2rem;
+  /* margin-left: 2rem; */
+  font-weight: 500;
 }
 
 .search-wrap {
@@ -27,7 +27,7 @@
 .search-wrap > input {
   border: none;
   border-radius: 0.5rem;
-  font-size: 1.2rem;
+  font-size: 1rem;
   padding-left: 1rem;
   outline: none;
   animation: slide-in ease 0.6s;
@@ -55,4 +55,99 @@
   color: #5e81f4;
   cursor: pointer;
   width: 3rem;
+}
+
+.tag-phase {
+  width: 100%;
+  height: 15%;
+  border-radius: 0.5rem;
+  background-color: #f7e5e9;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 1rem 0.5rem;
+}
+
+.tag-phase > button {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 0.3rem;
+  font-weight: 600;
+  cursor: pointer;
+  color: white;
+  height: 2rem;
+}
+
+.tag-phase > button:nth-child(odd) {
+  background-color: #5e81f4;
+}
+
+.tag-phase > button:nth-child(even) {
+  background-color: #ff808b;
+}
+
+.tag-phase > button:active {
+  transform: scale(0.9);
+}
+
+.content-list-phase {
+  width: 100%;
+  height: 73%;
+  background-color: white;
+  margin-top: 2%;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  overflow: scroll;
+  overflow-x: hidden;
+}
+
+.content-list-phase::-webkit-scrollbar {
+  background-color: white;
+  width: 10px;
+  border-top-right-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+}
+
+.content-list-phase::-webkit-scrollbar-thumb {
+  border-radius: 0.5rem;
+  background-color: #e3e3e3;
+}
+
+.content-list-phase > table {
+  width: 100%;
+  font-size: 1rem;
+}
+
+th,
+tr,
+td {
+  border-collapse: collapse;
+  text-align: left;
+  padding: 0.7rem 1rem;
+}
+
+th {
+  background-color: #e3e3e3;
+}
+
+th:nth-child(1),
+td:nth-child(1) {
+  border-top-left-radius: 0.5rem;
+  border-bottom-left-radius: 0.5rem;
+}
+
+th:nth-child(3),
+td:nth-child(3) {
+  border-top-right-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+}
+
+.active-row {
+  background-color: #ededed;
+}
+
+tr:hover {
+  background-color: #ededed;
+  cursor: pointer;
+  transition: 0.3s ease;
 }

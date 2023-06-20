@@ -1,0 +1,84 @@
+.add-menu-wrapper {
+  width: 100%;
+  height: 100%;
+  padding: 1rem;
+  overflow: scroll;
+  overflow-x: hidden;
+}
+
+.add-menu-wrapper::-webkit-scrollbar {
+  width: 10px;
+  background-color: white;
+}
+
+.add-menu-wrapper::-webkit-scrollbar-thumb {
+  background-color: #5e81f4;
+  border-radius: 0.5rem;
+}
+
+.add-container {
+  width: 100%;
+  border-radius: 0.5rem;
+  background-color: #ededed;
+}
+
+.add-container > h6 {
+  text-align: center;
+  padding: 1rem;
+  font-weight: 500;
+}
+
+.add-container > ul {
+  list-style: none;
+  font-size: 1rem;
+  text-align: left;
+  padding: 2rem;
+  font-weight: 500;
+}
+
+.add-container > ul > li {
+  margin: 1rem;
+}
+
+.add-container > ul > li > input,
+textarea,
+select {
+  outline: none;
+  border: none;
+  padding: 0.5rem 1rem;
+  width: 100%;
+  font-size: 1rem;
+}
+
+.separate-comma {
+  font-size: 0.8rem;
+}
+
+.add-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.add-buttons > button {
+  padding: 1rem 1rem;
+  margin: 1rem;
+  flex: 1 1;
+  font-size: 1rem;
+  color: white;
+  border: none;
+  border-radius: 0.3rem;
+  cursor: pointer;
+}
+
+.add-buttons > button:active {
+  transform: scale(0.9);
+}
+
+.add-buttons > button:nth-child(1) {
+  background-color: #5e81f4;
+}
+
+.add-buttons > button:nth-child(2) {
+  background-color: #ff808b;
+}
