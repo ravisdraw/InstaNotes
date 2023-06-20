@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { faClose, faSearch } from '@fortawesome/free-solid-svg-icons';
-import { Post } from '../shared/app.const';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { faClose, faEdit, faSearch } from '@fortawesome/free-solid-svg-icons';
+import { Post, SharedData } from '../shared/app.const';
+import { SharedService } from '../shared/shared.service';
 
 @Component({
   selector: 'app-home',
@@ -8,28 +9,53 @@ import { Post } from '../shared/app.const';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
+  constructor(private sharedService: SharedService) {}
+
+  @Output() homeToApp = new EventEmitter<string>();
+
   searchIcon = faSearch;
   closeIcon = faClose;
+  editIcon = faEdit;
+  deleteIcon = faClose;
   setSearch = false;
   tags: string[] = [];
-  latestPost: any = [];
+  latestPost: SharedData = {
+    activeDash: '',
+    addNewData: [],
+    editID: ''
+  };
 
   ngOnInit(): void {
-    const localData = localStorage.getItem('instaNotes');
-    if (localData) {
-      this.latestPost = JSON.parse(localData);
-    }
+    this.getLatestData();
     this.sortedPost();
-    this.filteringTags();
-    console.log(this.tags);
-    
+  }
+
+  getLatestData() {
+    this.sharedService.currentData.subscribe((data) => {
+      this.latestPost = data;
+    });
+  }
+
+  editPost(postId: any) {
+    this.homeToApp.emit(postId);
+  }
+
+  deletePost(postId: any) {
+    const filteredArray = this.latestPost.addNewData.filter((item) => {
+      if (item.postid !== postId) {
+        return item;
+      }
+    });
+
+    this.latestPost.addNewData = filteredArray;
+    this.sharedService.setLatestData(this.latestPost);
   }
 
   filteringTags() {
-    for(const obj of this.latestPost) {
-      const tagArray:string [] = obj.postKeywords;
-      for(const tag of tagArray) {
-        if(!this.tags.includes(tag)) {
+    for (const obj of this.latestPost.addNewData) {
+      const tagArray: string[] = obj.postKeywords;
+      for (const tag of tagArray) {
+        if (!this.tags.includes(tag)) {
           this.tags.push(tag);
         }
       }
@@ -37,8 +63,11 @@ export class HomeComponent implements OnInit {
   }
 
   sortedPost() {
-    this.latestPost.sort((a:any,b:any) => new Date(b.postTime).getTime() - new Date(a.postTime).getTime());
-    console.log(this.latestPost);
+    this.latestPost.addNewData.sort(
+      (a: any, b: any) =>
+        new Date(b.postTime).getTime() - new Date(a.postTime).getTime()
+    );
+    this.filteringTags();
   }
 
   setSearchStatus() {

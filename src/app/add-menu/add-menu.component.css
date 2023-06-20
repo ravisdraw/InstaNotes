@@ -7,7 +7,7 @@
 }
 
 .add-menu-wrapper::-webkit-scrollbar {
-  width: 10px;
+  width: 8px;
   background-color: white;
 }
 

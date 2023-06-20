@@ -118,6 +118,20 @@
   font-size: 1rem;
 }
 
+tr td:nth-child(1) {
+  width: 10%;
+}
+
+tr td:nth-child(2) {
+  width: 20%;
+}
+
+tr td:nth-child(3) {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
 th,
 tr,
 td {
@@ -150,4 +164,25 @@ tr:hover {
   background-color: #ededed;
   cursor: pointer;
   transition: 0.3s ease;
+}
+
+.post-buttons > button{
+  padding: 0.2rem 0.5rem;
+  margin-left: 0.5rem;
+  border: none;
+  border-radius: 0.2rem;
+  color: white;
+  cursor: pointer;
+}
+
+.post-buttons > button:nth-child(1) {
+  background-color: #5e81f4;
+}
+
+.post-buttons > button:nth-child(2) {
+  background-color: #ff808b;
+}
+
+.post-buttons > button:active {
+  transform: scale(0.8);
 }

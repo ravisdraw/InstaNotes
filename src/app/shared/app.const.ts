@@ -24,3 +24,9 @@ export interface Post {
   postNotes: string;
   postTime: Date;
 }
+
+export interface SharedData { 
+  activeDash: string;
+  addNewData: any[];
+  editID: string;
+}

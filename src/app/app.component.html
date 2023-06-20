@@ -3,10 +3,10 @@
         <app-dashboard></app-dashboard>
     </div>
     <div class="home">
-        <app-home></app-home>
+        <app-home (homeToApp)="getEditPostId($event)"></app-home>
     </div>
     <div class="content">
         <app-content *ngIf="!isAddData"></app-content>
-        <app-add-menu *ngIf="isAddData"></app-add-menu>
+        <app-add-menu *ngIf="isAddData" [receivedEditPost]="editData"></app-add-menu>
     </div>
 </div>

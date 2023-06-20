@@ -10,7 +10,6 @@ import { ContentComponent } from './content/content.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { InstaPostComponent } from './insta-post/insta-post.component';
 import { AddMenuComponent } from './add-menu/add-menu.component';
-import { NewDataPageComponent } from './new-data-page/new-data-page.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +19,6 @@ import { NewDataPageComponent } from './new-data-page/new-data-page.component';
     ContentComponent,
     InstaPostComponent,
     AddMenuComponent,
-    NewDataPageComponent,
   ],
   imports: [BrowserModule, FontAwesomeModule, FormsModule],
   providers: [],

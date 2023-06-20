@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { Post, dashBoardItems } from '../shared/app.const';
+import { Component, Input, OnInit } from '@angular/core';
+import { Post, SharedData, dashBoardItems } from '../shared/app.const';
+import { SharedService } from '../shared/shared.service';
 
 @Component({
   selector: 'app-add-menu',
@@ -7,6 +8,8 @@ import { Post, dashBoardItems } from '../shared/app.const';
   styleUrls: ['./add-menu.component.css'],
 })
 export class AddMenuComponent implements OnInit {
+
+  @Input() receivedEditPost:any = {};
   dashBoardItems = dashBoardItems;
   postCode = '';
   postTitle = '';
@@ -15,14 +18,30 @@ export class AddMenuComponent implements OnInit {
   postNotes = '';
   keywordArray: any[] = [];
   instaNotes: any[] = [];
+  currentData: SharedData = {
+    activeDash: '',
+    addNewData: [],
+    editID : ''
+  };
+
+  constructor(private sharedService: SharedService) {}
 
   ngOnInit(): void {
     this.getLocalStorageData();
+    this.getLatestData();
+  }
+ 
+  getLocalStorageData() {
+    const existingData = localStorage.getItem('instaNotes');
+    this.currentData = existingData ? JSON.parse(existingData) : this.currentData;
   }
 
-  getLocalStorageData() {
-    const existingData = localStorage.getItem('instNotes');
-    this.instaNotes = existingData ? JSON.parse(existingData) : [];
+  getLatestData() {
+    this.sharedService.currentData.subscribe(data => {
+      if(data) {
+        this.currentData = data;
+      }
+    })
   }
 
   addPost(post: Post) {
@@ -31,7 +50,9 @@ export class AddMenuComponent implements OnInit {
     //   this.instaNotes[postCategory] = [];
     // }
     this.instaNotes.push(post);
-    localStorage.setItem('instaNotes', JSON.stringify(this.instaNotes));
+    this.currentData.activeDash = 'Add Data';
+    this.currentData.addNewData.push(post);
+    this.sharedService.setLatestData(this.currentData)
   }
 
   getPostID(url: any) {
@@ -65,6 +86,10 @@ export class AddMenuComponent implements OnInit {
     this.postNotes = '';
   }
 
+  cancelButton() {
+    this.clearInputFields();
+  }
+
   savePostDetails() {
     let postID = this.getPostID(this.postCode);
     this.getPostKeywords(this.postkeyWords);
@@ -78,7 +103,10 @@ export class AddMenuComponent implements OnInit {
       postTime: new Date(),
     };
 
-    this.addPost(newPost);
+    // if (this.postCode !== '') {
+    //   this.addPost(newPost);
+    // }
+      this.addPost(newPost);
     this.clearInputFields();
   }
 }

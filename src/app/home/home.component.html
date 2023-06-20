@@ -21,20 +21,15 @@
         </tr>
       </thead>
       <tbody class="table-body">
-        <tr>
-          <td>1</td>
-          <td>HTML</td>
-          <td>How to use the span tag in html</td>
-        </tr>
-        <tr>
-          <td>1</td>
-          <td>HTML</td>
-          <td>How to use the span tag in html</td>
-        </tr>
-        <tr>
-          <td>1</td>
-          <td>HTML</td>
-          <td>How to use the span tag in html</td>
+        <tr *ngFor="let data of latestPost.addNewData; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ data.postCategory }}</td>
+          <td>{{ data.postTitle }}
+            <div class="post-buttons">
+              <button (click)="editPost(data.postid)"><fa-icon [icon]="editIcon"></fa-icon></button>
+              <button (click)="deletePost(data.postid)"><fa-icon [icon]="deleteIcon"></fa-icon></button>
+            </div>
+          </td>
         </tr>
       </tbody>
     </table>

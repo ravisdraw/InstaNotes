@@ -3,19 +3,19 @@
         <!-- <h6>Add New Notes</h6> -->
         <ul>
             <li>Paste URL</li>
-            <li><input type="text" class="url" [(ngModel)] = 'postCode' required=""></li>
+            <li><input type="text" class="url" [(ngModel)] = 'postCode' required="" [value]="receivedEditPost.postid"></li>
             <li>Title</li>
-            <li><input type="text" class="title" [(ngModel)] = 'postTitle' required=""></li>
+            <li><input type="text" class="title" [(ngModel)] = 'postTitle' required="" [value]="receivedEditPost.postTitle"></li>
             <li>Category</li>
-            <li><select type="s" class="title" [(ngModel)] = 'postCategory' required="">
+            <li><select type="s" class="title" [(ngModel)] = 'postCategory' required="" [value]="receivedEditPost.postCategory">
                 <option disabled selected value> -- Select an Option --</option>
                 <option *ngFor="let item of dashBoardItems | slice:0:dashBoardItems.length-1" value="{{item.name}}">{{item.name}}</option>
             </select></li>
             <li>Keywords <span><p class="separate-comma">[separated By Comma,]</p></span></li>
-            <li><input type="text" class="keywords" [(ngModel)] = 'postkeyWords' required=""></li>
+            <li><input type="text" class="keywords" [(ngModel)] = 'postkeyWords' required="" [value]="receivedEditPost.postkeyWords"></li>
             <li>Notes</li>
-            <li><textarea class="notes" id="" cols="30" rows="5" [(ngModel)] = 'postNotes'></textarea></li>
-            <li class="add-buttons"><button (click)="savePostDetails()">Save</button><button>Cancel</button></li>
+            <li><textarea class="notes" id="" cols="30" rows="5" [(ngModel)] = 'postNotes' [value]="receivedEditPost.notes"></textarea></li>
+            <li class="add-buttons"><button (click)="savePostDetails()">Save</button><button (click)="cancelButton()">Clear</button></li>
         </ul>
     </div>
 </div>
