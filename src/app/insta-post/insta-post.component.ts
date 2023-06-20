@@ -9,7 +9,7 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 })
 export class InstaPostComponent implements OnInit {
   
-  instaID = 'CtQZjBxrWFS';
+  instaID = 'CtiX-dovegw';
 
   constructor(private sanitizer: DomSanitizer) {}
  
