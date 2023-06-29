@@ -1,12 +1,14 @@
 <div class="container">
+    <ng-toast></ng-toast>
     <div class="dashboard">
-        <app-dashboard></app-dashboard>
+        <app-dashboard (activeDashBoardItem)="getActiveDashboardItem($event)"></app-dashboard>
     </div>
     <div class="home">
-        <app-home (homeToApp)="getEditPostId($event)"></app-home>
+        <app-home (homeToApp)="getEditPostId($event)" [sentrecentPost]="recentPost" [activeDashBoardMenu]="activeDashboardMenu"></app-home>
     </div>
     <div class="content">
-        <app-content *ngIf="isAddData"></app-content>
-        <app-add-menu *ngIf="!isAddData" [receivedEditPost]="editData"></app-add-menu>
+        <app-content *ngIf="!isEditClicked" [receivedPostId]="editData"></app-content>
+        <app-add-menu *ngIf="isEditClicked" [receivedEditPost]="editData" 
+        (instaNotesData)="getInstaNotesData($event)"></app-add-menu>
     </div>
 </div>

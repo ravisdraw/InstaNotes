@@ -1,22 +1,16 @@
 <div class="content-wrapper">
     <div class="insta-iframe">
-       <app-insta-post></app-insta-post>
+        <div class="no-post" *ngIf="receivedPostId===''">
+            <div class="cute-hamster"></div>
+            <h6>No Post Selected</h6>
+        </div>
+       <app-insta-post *ngIf="receivedPostId!==''" [postId]="receivedPostId"></app-insta-post>
     </div>
-    <div class="post-details">
-        <ol type="1">
-            <p>How to write the span tag inside html?</p>
-            <li>Website 1</li>
-            <li>Website 2</li>
-            <li>Website 3</li>
-            <li>Website 4</li>
-            <li>Website 1</li>
-            <li>Website 2</li>
-            <li>Website 3</li>
-            <li>Website 4</li>
-            <li>Website 1</li>
-            <li>Website 2</li>
-            <li>Website 3</li>
-            <li>Website 4</li>
-        </ol>
+    <div class="show-notes" *ngIf="receivedPostId!==''">
+        <h6>{{postTitle}}</h6>
+        <p>{{postNotes}}</p>
+        <ol *ngFor="let item of postLinks; let i=index">
+            <li><a [href]="item" target="_blank">{{i+1}}. {{item}}</a></li>
+        </ol>  
     </div>
 </div>

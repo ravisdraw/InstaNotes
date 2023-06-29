@@ -10,6 +10,9 @@ import { ContentComponent } from './content/content.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { InstaPostComponent } from './insta-post/insta-post.component';
 import { AddMenuComponent } from './add-menu/add-menu.component';
+import { NgToastModule } from 'ng-angular-popup';
+
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -18,9 +21,9 @@ import { AddMenuComponent } from './add-menu/add-menu.component';
     HomeComponent,
     ContentComponent,
     InstaPostComponent,
-    AddMenuComponent,
+    AddMenuComponent
   ],
-  imports: [BrowserModule, FontAwesomeModule, FormsModule],
+  imports: [BrowserModule, FontAwesomeModule, FormsModule, NgToastModule,ReactiveFormsModule],
   providers: [],
   bootstrap: [AppComponent],
 })

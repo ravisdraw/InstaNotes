@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { dashBoardItems,SharedData } from '../shared/app.const';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { dashBoardItems } from '../shared/app.const';
 import { SharedService } from '../shared/shared.service';
 
 @Component({
@@ -8,36 +8,30 @@ import { SharedService } from '../shared/shared.service';
   styleUrls: ['./dashboard.component.css'],
 })
 export class DashboardComponent implements OnInit {
+  constructor(private sharedService: SharedService) {}
 
-  constructor(private sharedService : SharedService) {}
+  @Output() activeDashBoardItem = new EventEmitter<string>();
 
   dashBoardItems = dashBoardItems;
-
-   latestData : SharedData = {
-    activeDash : '',
-    addNewData : [],
-    editID : ''
-  };
 
   ngOnInit() {
     this.getLocalStorage();
   }
 
   getLocalStorage() {
-    const existingData = localStorage.getItem('instaNotes');
-    this.latestData = existingData ? JSON.parse(existingData) : this.latestData;
-    console.log("insidedash ", this.latestData);
+    // const existingData = localStorage.getItem('instaNotes');
+    // this.latestData = existingData ? JSON.parse(existingData) : this.latestData;
   }
 
-  checkActive(name:any) {
-
-    dashBoardItems.forEach(item => {
-      if(item.name !== name) {
+  checkActive(name: any) {
+    this.activeDashBoardItem.emit(name);
+    dashBoardItems.forEach((item) => {
+      if (item.name !== name) {
         item.active = false;
       } else {
         item.active = true;
       }
-    })
-    this.sharedService.setLatestData(this.latestData);
+    });
+    // this.sharedService.setLatestData(this.latestData);
   }
 }

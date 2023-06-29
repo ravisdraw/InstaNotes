@@ -1,47 +1,84 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Post, SharedData, dashBoardItems } from '../shared/app.const';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+} from '@angular/core';
+import { Post, dashBoardItems } from '../shared/app.const';
 import { SharedService } from '../shared/shared.service';
+
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-add-menu',
   templateUrl: './add-menu.component.html',
   styleUrls: ['./add-menu.component.css'],
 })
-export class AddMenuComponent implements OnInit {
+export class AddMenuComponent implements OnInit, OnChanges {
+  @Input() receivedEditPost: any = {};
+  @Output() instaNotesData = new EventEmitter<any>();
 
-  @Input() receivedEditPost:any = {};
   dashBoardItems = dashBoardItems;
-  postCode = '';
-  postTitle = '';
-  postCategory = '';
-  postkeyWords = '';
-  postNotes = '';
   keywordArray: any[] = [];
   instaNotes: any[] = [];
-  currentData: SharedData = {
-    activeDash: '',
-    addNewData: [],
-    editID : ''
-  };
+
+  myForm: FormGroup = new FormGroup({
+    url: new FormControl('', Validators.required),
+    title: new FormControl('', Validators.required),
+    category: new FormControl('', Validators.required),
+    keywords: new FormControl('', Validators.required),
+    notes: new FormControl(''),
+    links: new FormControl('')
+  });
+
+  addedLinks: any[] = [''];
+  notesData: any[] = [];
 
   constructor(private sharedService: SharedService) {}
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
+
+  ngOnChanges() {
     this.getLocalStorageData();
-    this.getLatestData();
-  }
- 
-  getLocalStorageData() {
-    const existingData = localStorage.getItem('instaNotes');
-    this.currentData = existingData ? JSON.parse(existingData) : this.currentData;
+    this.setEditValues();
+    if (this.receivedEditPost === '') {
+      this.clearInputFields();
+    }
   }
 
-  getLatestData() {
-    this.sharedService.currentData.subscribe(data => {
-      if(data) {
-        this.currentData = data;
-      }
-    })
+  pushAddedLinks(event:any,index:any) {
+    this.addedLinks[index] = event.target.value;
+    console.log(this.addedLinks);
+  }
+
+  addLink() {
+    this.addedLinks.push('');
+  }
+
+  deleteLink(index: any) {
+    this.addedLinks.splice(index, 1);
+  }
+
+  setEditValues() {  
+    if (this.receivedEditPost) {
+      this.instaNotes.filter((item) => {
+        if (item.postid === this.receivedEditPost) {
+          this.myForm.get('url')?.setValue(item.postid);
+          this.myForm.get('title')?.setValue(item.postTitle);
+          this.myForm.get('category')?.setValue(item.postCategory);
+          this.myForm.get('keywords')?.setValue(item.postKeywords);
+          this.myForm.get('notes')?.setValue(item.postNotes);
+          this.addedLinks = [...item.postLinks];
+        }
+      });
+    }
+  }
+
+  getLocalStorageData() {
+    const existingData = localStorage.getItem('mainData');
+    this.instaNotes = existingData ? JSON.parse(existingData) : this.instaNotes;
   }
 
   addPost(post: Post) {
@@ -50,63 +87,69 @@ export class AddMenuComponent implements OnInit {
     //   this.instaNotes[postCategory] = [];
     // }
     this.instaNotes.push(post);
-    this.currentData.activeDash = 'Add Data';
-    this.currentData.addNewData.push(post);
-    this.sharedService.setLatestData(this.currentData)
+    // this.currentData.addNewData.push(post);
+    // this.sharedService.setLatestData(this.currentData);
   }
 
   getPostID(url: any) {
-    var pattern1 = /\/p\/([A-Za-z0-9_-]+)/;
-    var pattern2 = /\/reel\/([A-Za-z0-9_-]+)/;
-    var match = url.match(pattern1);
-    if (match === null) {
-      match = url.match(pattern2);
-    }
-    if (match && match.length >= 2) {
-      return match[1];
+    if (url.startsWith('https://www.instagram')) {
+      var pattern1 = /\/p\/([A-Za-z0-9_-]+)/;
+      var pattern2 = /\/reel\/([A-Za-z0-9_-]+)/;
+      var match = url.match(pattern1);
+      if (match === null) {
+        match = url.match(pattern2);
+      }
+      if (match && match.length >= 2) {
+        return match[1];
+      } else {
+        return null;
+      }
     } else {
-      return null;
+      return url;
     }
   }
 
-  getPostKeywords(keywords: string) {
-    var splitKeywords = keywords.trim().split(',');
-    splitKeywords.forEach((item) => {
-      if (item !== '' && item.length > 2) {
-        this.keywordArray.push(item);
+  getPostKeywords(keywords: any) {
+      if(typeof(keywords) === 'string') {
+        var splitKeywords = keywords.split(',');
+        splitKeywords.forEach((item:any) => {
+          if (item !== '' && item.length > 2) {
+            this.keywordArray.push(item.toLowerCase());
+          }
+        });
+        return this.keywordArray;
+      } else {
+        return keywords;
       }
-    });
   }
 
   clearInputFields() {
-    this.postCode = '';
-    this.postkeyWords = '';
-    this.postCategory = '';
-    this.postTitle = '';
-    this.postNotes = '';
+    this.myForm.reset();
+    this.addedLinks = []
   }
 
-  cancelButton() {
+  clearButton() {
     this.clearInputFields();
+    this.sharedService.showWarn('Inputs are Cleared');
   }
 
   savePostDetails() {
-    let postID = this.getPostID(this.postCode);
-    this.getPostKeywords(this.postkeyWords);
-
-    const newPost: Post = {
-      postid: postID,
-      postTitle: this.postTitle,
-      postCategory: this.postCategory,
-      postKeywords: this.keywordArray,
-      postNotes: this.postNotes,
-      postTime: new Date(),
-    };
-
-    // if (this.postCode !== '') {
-    //   this.addPost(newPost);
-    // }
-      this.addPost(newPost);
-    this.clearInputFields();
+    if (this.myForm.valid) {
+      const addnewData: Post = {
+        postid: this.getPostID(this.myForm.value.url),
+        postTitle: this.myForm.value.title,
+        postCategory: this.myForm.value.category,
+        postKeywords: this.getPostKeywords(this.myForm.value.keywords),
+        postNotes: this.myForm.value.notes,
+        postLinks: this.addedLinks,
+        postTime: new Date(),
+      };
+      console.log(addnewData);
+      this.instaNotesData.emit(addnewData);
+      this.clearInputFields();
+      this.sharedService.showSuccess('Post Saved Successfully!');
+    } else {
+      this.sharedService.showError('Please Enter Valid Inputs');
+    }
   }
 }

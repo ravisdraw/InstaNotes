@@ -5,28 +5,34 @@ import {
   faBookOpenReader,
   faComputer,
   faEdit,
+  faCode,
+  faReplyAll,
+  faCheck,
+  faCheckSquare,
 } from '@fortawesome/free-solid-svg-icons';
 
 export const dashBoardItems = [
-  { name: 'Design', icon: faPaintBrush , active : false },
+  { name: 'All Post', icon: faCheckSquare , active : true },
+  { name: 'UI', icon: faPaintBrush , active : false },
   { name: 'Tech', icon: faAppleAlt , active : false },
+  { name: 'Coding', icon: faCode , active : false },
   { name: 'Trading', icon: faMoneyCheckDollar , active : false },
   { name: 'Interview', icon: faBookOpenReader , active : false },
   { name: 'AI', icon: faComputer , active : false },
-  { name: 'Add Data', icon: faEdit , active : true },
 ];
 
 export interface Post {
   postid: string;
   postTitle: string;
   postCategory: string;
-  postKeywords: string[];
+  postKeywords: any;
   postNotes: string;
-  postTime: Date;
+  postLinks: any;
+  postTime: any;
 }
 
-export interface SharedData { 
-  activeDash: string;
-  addNewData: any[];
-  editID: string;
+export interface Note {
+  postid:string;
+  postNotes:string;
+  noteLinks:any;
 }

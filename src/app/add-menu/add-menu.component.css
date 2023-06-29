@@ -28,7 +28,7 @@
   font-weight: 500;
 }
 
-.add-container > ul {
+.add-container > form > ul {
   list-style: none;
   font-size: 1rem;
   text-align: left;
@@ -36,11 +36,11 @@
   font-weight: 500;
 }
 
-.add-container > ul > li {
+.add-container > form > ul > li {
   margin: 1rem;
 }
 
-.add-container > ul > li > input,
+.add-container > form > ul > li > input,
 textarea,
 select {
   outline: none;
@@ -48,6 +48,10 @@ select {
   padding: 0.5rem 1rem;
   width: 100%;
   font-size: 1rem;
+}
+
+.failed-input {
+  border: 0.5px solid red;
 }
 
 .separate-comma {
@@ -81,4 +85,40 @@ select {
 
 .add-buttons > button:nth-child(2) {
   background-color: #ff808b;
+}
+
+.add-link-btn > button {
+  border-radius: 50%;
+  padding: 0.3rem 0.6rem;
+  font-size: 1rem;
+  margin-right: 1rem;
+  background-color: #5EBA7D;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+li > span {
+  font-size: 0.8rem;
+}
+
+li>input::placeholder {
+  font-size: 0.8rem;
+  font-style: italic;
+}
+
+.link-card {
+  position: relative;
+}
+
+.cancel-btn {
+  height: 2rem;
+  width: 2rem;
+  background-color: red;
+  background: url(../../assets/letter-x.gif);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 80%;
+  position: absolute;
+  right: 0;
 }

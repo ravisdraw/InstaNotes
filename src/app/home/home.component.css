@@ -22,6 +22,9 @@
 
 .search-wrap {
   display: flex;
+  width: 16rem;
+  height: 3rem;
+  position: relative;
 }
 
 .search-wrap > input {
@@ -30,7 +33,22 @@
   font-size: 1rem;
   padding-left: 1rem;
   outline: none;
-  animation: slide-in ease 0.6s;
+  background-color: none;
+  padding: 1rem;
+  width: 100%;
+  height: 100%;
+  /* animation: slide-in ease 0.6s; */
+}
+
+.search-wrap > .search-icon {
+  width: 20%;
+  height: 100%;
+  position: absolute;
+  background: url(../../assets/speech-bubble.gif);
+  background-position: center;
+  background-size: 80%;
+  background-repeat: no-repeat;
+  right: 0;
 }
 
 @keyframes slide-in {
@@ -39,10 +57,11 @@
     opacity: 0;
   }
   50% {
+    width: 17rem;
     opacity: 1;
   }
   100% {
-    width: 16rem;
+    width: 15rem;
   }
 }
 
@@ -86,6 +105,10 @@
   background-color: #ff808b;
 }
 
+.tag-phase > button:nth-child(1) {
+  background-color: #5EBA7D;
+}
+
 .tag-phase > button:active {
   transform: scale(0.9);
 }
@@ -119,7 +142,7 @@
 }
 
 tr td:nth-child(1) {
-  width: 10%;
+  width: 15%;
 }
 
 tr td:nth-child(2) {
@@ -130,6 +153,10 @@ tr td:nth-child(3) {
   width: 100%;
   display: flex;
   justify-content: space-between;
+}
+
+tr td:nth-child(4) {
+  width: 15%;
 }
 
 th,
@@ -186,3 +213,4 @@ tr:hover {
 .post-buttons > button:active {
   transform: scale(0.8);
 }
+
